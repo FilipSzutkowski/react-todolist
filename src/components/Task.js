@@ -1,8 +1,27 @@
 import React from 'react';
+import { IoIosCheckmark, IoIosTrash } from 'react-icons/io';
 
 class Task extends React.Component {
   render() {
-    return <li>{this.props.taskName}</li>;
+    return (
+      <div className="task">
+        <p>{this.props.taskName}</p>
+        <div className="taskBtns">
+          <IoIosCheckmark
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              this.props.onCheck(this.props.id);
+            }}
+          />
+          <IoIosTrash
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              this.props.onDelete(this.props.id);
+            }}
+          />
+        </div>
+      </div>
+    );
   }
 }
 

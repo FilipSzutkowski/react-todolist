@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,500&display=swap');
+
+:root {
+  --first-color: #252525;
+  --second-color: #6830c3;
+  --third-color: #80ffdb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  color: white;
+}
+
+html {
+  background-color: var(--first-color);
+}
+
+#root {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  margin-top: 2em;
+  background-color: var(--second-color);
+}
+
+/* Task container (input and taskList */
+.taskContainer {
+  min-width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add task form */
+.addTask {
+  min-width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 0.2em;
+}
+
+.addTask input {
+  color: var(--first-color);
+  width: 100%;
+  padding: 0.3em 0 0.3em 0;
+  border: none;
+}
+
+.addTask button {
+  border: none;
+  cursor: pointer;
+  padding: 0 0.5em 0 0.5em;
+}
+
+/* Task elm */
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--third-color);
+  margin: 0.5em 0 0.5em 0;
+  padding: 0.5em 0 0.5em 0;
+}
+
+.task p {
+  margin-left: 0.7em;
+  color: var(--first-color);
+}
+
+.taskBtns {
+  margin-right: 0.3em;
+  display: flex;
+  max-height: min-content;
+}

@@ -3,7 +3,7 @@ import React from 'react';
 class TaskInput extends React.Component {
   render() {
     return (
-      <form onSubmit={this.props.onSubmit}>
+      <form className="addTask" onSubmit={this.props.onSubmit}>
         <input
           type="text"
           placeholder="Enter your task!"
