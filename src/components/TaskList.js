@@ -8,6 +8,7 @@ const TaskList = (props) => {
         taskName={task.name}
         key={task.id}
         id={task.id}
+        checked={task.checked}
         onCheck={props.onCheck}
         onDelete={props.onDelete}
       />

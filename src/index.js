@@ -40,13 +40,16 @@ class App extends React.Component {
   }
 
   handleCheck(id) {
-    const updateTask = {...task, checked: }
-    const newTasks = this.state.tasks.map((task) => {
-      if (task.id === id) {
-        task.checked = true;
-      }
-      return task;
-    });
+    const oldTasksList = this.state.tasks;
+    const indexOfOldTask = oldTasksList.findIndex((task) => task.id === id);
+    const oldTask = { ...oldTasksList[indexOfOldTask] };
+    const tasksWithoutOldTask = oldTasksList.filter((task) => task.id !== id);
+    const newTask = { ...oldTask, checked: !oldTask.checked };
+    const newTasks = oldTask.checked
+      ? [newTask, ...tasksWithoutOldTask]
+      : [...tasksWithoutOldTask, newTask];
+
+    this.setState({ tasks: newTasks });
   }
 
   handleDelete(id) {

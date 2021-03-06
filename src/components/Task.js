@@ -5,7 +5,9 @@ class Task extends React.Component {
   render() {
     return (
       <div className="task">
-        <p>{this.props.taskName}</p>
+        <p className={this.props.checked ? 'checked' : ''}>
+          {this.props.taskName}
+        </p>
         <div className="taskBtns">
           <IoIosCheckmark
             style={{ cursor: 'pointer' }}

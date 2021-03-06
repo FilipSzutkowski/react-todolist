@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: white;
 }
 
@@ -72,6 +72,10 @@ html {
 .task p {
   margin-left: 0.7em;
   color: var(--first-color);
+}
+
+.checked {
+  text-decoration: line-through;
 }
 
 .taskBtns {
