@@ -1,16 +1,15 @@
-import React from 'react';
 import Task from './Task';
 
-const TaskList = (props) => {
-  return props.taskList.map((task) => {
+const TaskList = ({ taskList, onCheck, onDelete }) => {
+  return taskList.map(({ name, id, checked }) => {
     return (
       <Task
-        taskName={task.name}
-        key={task.id}
-        id={task.id}
-        checked={task.checked}
-        onCheck={props.onCheck}
-        onDelete={props.onDelete}
+        taskName={name}
+        key={id}
+        id={id}
+        checked={checked}
+        onCheck={onCheck}
+        onDelete={onDelete}
       />
     );
   });
