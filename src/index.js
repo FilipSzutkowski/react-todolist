@@ -1,46 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './styles/style.css';
 import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { tasks: [], userInput: '', taskCounter: 0 };
+const App = () => {
+  const [tasks, setTasks] = useState([]);
+  const [userInput, setUserInput] = useState('');
+  const [taskCounter, setTaskCounter] = useState(0);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCheck = this.handleCheck.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
+  const handleChange = (e) => {
+    setUserInput(e.target.value);
+  };
 
-  handleChange(e) {
-    this.setState({ userInput: e.target.value });
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const taskNameFromUser = this.state.userInput.trim();
+    const taskNameFromUser = userInput.trim();
     if (taskNameFromUser === '') {
       return;
-    } else {
-      const emptyString = '';
-      const newTaskCount = this.state.taskCounter + 1;
-      const newTasks = [
-        ...this.state.tasks,
-        { name: taskNameFromUser, id: newTaskCount, checked: false },
-      ];
-      this.setState({
-        tasks: newTasks,
-        userInput: emptyString,
-        taskCounter: newTaskCount,
-      });
     }
-  }
+    const emptyString = '';
+    const newTaskCount = taskCounter + 1;
+    const newTasks = [
+      ...tasks,
+      { name: taskNameFromUser, id: newTaskCount, checked: false },
+    ];
 
-  handleCheck(id) {
-    const oldTasksList = this.state.tasks;
+    setTasks(newTasks);
+    setUserInput(emptyString);
+    setTaskCounter(newTaskCount);
+  };
+
+  const handleCheck = (id) => {
+    const oldTasksList = tasks;
     const indexOfOldTask = oldTasksList.findIndex((task) => task.id === id);
     const oldTask = { ...oldTasksList[indexOfOldTask] };
     const tasksWithoutOldTask = oldTasksList.filter((task) => task.id !== id);
@@ -49,32 +41,31 @@ class App extends React.Component {
       ? [newTask, ...tasksWithoutOldTask]
       : [...tasksWithoutOldTask, newTask];
 
-    this.setState({ tasks: newTasks });
-  }
+    setTasks(newTasks);
+  };
 
-  handleDelete(id) {
-    const newTasks = this.state.tasks.filter((task) => task.id !== id);
-    this.setState({ tasks: newTasks });
-  }
+  const handleDelete = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
 
-  render() {
-    return (
-      <div className="container">
-        <main className="taskContainer">
-          <TaskInput
-            onSubmit={this.handleSubmit}
-            onChange={this.handleChange}
-            value={this.state.userInput}
-          />
-          <TaskList
-            taskList={this.state.tasks}
-            onCheck={this.handleCheck}
-            onDelete={this.handleDelete}
-          />
-        </main>
-      </div>
-    );
-  }
-}
+    setTasks(newTasks);
+  };
+
+  return (
+    <div className="container">
+      <main className="taskContainer">
+        <TaskInput
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+          value={userInput}
+        />
+        <TaskList
+          taskList={tasks}
+          onCheck={handleCheck}
+          onDelete={handleDelete}
+        />
+      </main>
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -10,12 +10,14 @@ class Task extends React.Component {
         </p>
         <div className="taskBtns">
           <IoIosCheckmark
+            tabIndex="0"
             style={{ cursor: 'pointer' }}
             onClick={() => {
               this.props.onCheck(this.props.id);
             }}
           />
           <IoIosTrash
+            tabIndex="0"
             style={{ cursor: 'pointer' }}
             onClick={() => {
               this.props.onDelete(this.props.id);
