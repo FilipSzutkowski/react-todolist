@@ -14,3 +14,5 @@ Challanges:
 <b>Notes: </b>
 
 Initially made with class components without using hooks, then refactored to use hooks with arrow function based components instead.
+
+Got a really good hang of destructuring because of this project.
