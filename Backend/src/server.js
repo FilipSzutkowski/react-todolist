@@ -1,21 +1,30 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 
 const app = express();
-app.set('port', process.env.PORT || 8080);
-app.use(bodyParser.json());
+app.set('port', process.env.PORT || 3001);
+
+let tasks = [
+  { name: 'Do dishes', id: 1, checked: false },
+  { name: 'Clean the stove', id: 2, checked: false },
+  { name: 'Make a sandwich', id: 3, checked: false },
+  { name: 'Call mom', id: 4, checked: true },
+];
 
 let user = {
   name: 'Hobbit',
   auth: 'randomStringAndNumber',
-  tasks: [],
+  tasks: tasks,
 };
+
+app.get('/user', (req, res) => {
+  res.status(200).json(user);
+});
 
 app.post('/profile', (req, res) => {
   const { name, auth, tasks } = req.body;
   const userAuth = name === user.name && auth === user.auth;
   if (!userAuth) {
-    res.status(500).send('wrong credz');
+    res.status(500).json('wrong credz');
     return;
   }
   user = { ...user, tasks: tasks };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 
@@ -6,6 +6,22 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [taskCounter, setTaskCounter] = useState(0);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await fetch('/user');
+        const data = await res.json();
+
+        setTasks(data.tasks);
+        setTaskCounter(data.tasks.length);
+      } catch (err) {
+        return err;
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleChange = (e) => {
     setUserInput(e.target.value);
